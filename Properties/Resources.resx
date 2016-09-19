@@ -198,4 +198,10 @@
   <data name="ProgramDescription" xml:space="preserve">
     <value>printPoster is designed for printing large images such as posters, topographic maps, banners on a set of smaller sheets, preserving desired scale. </value>
   </data>
+  <data name="SelectionFmt" xml:space="preserve">
+    <value>Selection top left: {0}, {1}, size {2} x {3} px, {4}</value>
+  </data>
+  <data name="NativeMark" xml:space="preserve">
+    <value> (native)</value>
+  </data>
 </root>

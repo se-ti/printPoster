@@ -133,6 +133,15 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  (native).
+        /// </summary>
+        internal static string NativeMark {
+            get {
+                return ResourceManager.GetString("NativeMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; is not a float value.
         /// </summary>
         internal static string NotAFloatFmt {
@@ -219,6 +228,15 @@ namespace printPoster.Properties {
         internal static string Resolution {
             get {
                 return ResourceManager.GetString("Resolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection top left: {0}, {1}, size {2} x {3} px, {4}.
+        /// </summary>
+        internal static string SelectionFmt {
+            get {
+                return ResourceManager.GetString("SelectionFmt", resourceCulture);
             }
         }
         

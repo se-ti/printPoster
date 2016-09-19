@@ -3,22 +3,28 @@ using System.Windows.Forms;
 
 /// todo
 /// icon 
-/// git
+/// инструмент линейка
 /// ++- localization -- дожать в 1 файл
 /// память на больших зумах
-/// и таки корректная работа с рамками  // // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
-/// +- разобраться, какие поля тащим из настроек принтера!   
 
+/// рассинхронизация скролла и картинки
+/// +- git -- доделать дистрибутивы
 /// чистка кода
 /// правильный подсчет страниц при смене разрешения и т.п. (было 5, стало больше)
 /// правильный подсчет страниц при смене принтера
+/// +- mark native resolution
+/// 
 /// rotate image
 /// плоттеры и печать на рулоне
-/// win32, определяться c имеющимся .Net Framework
+/// win32, определяться c имеющимся .Net Framework -- а надо?
 /// installer
-/// -+ about
+/// +- about
 /// +- command line params
+/// +- и таки корректная работа с рамками  // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
+/// +- разобраться, какие поля тащим из настроек принтера!   
 
+/// ++ изменять разрешение по табу и т.п.
+/// ++ размер зоны выделения в px и см
 /// ++ подбор названия printPoster -- printLarge printImage panoPrint 
 /// ++ автоскроллинг: partial deselect 
 /// +- zoom по центру экрана

@@ -492,8 +492,9 @@
             this.dpiSelect.DropDownWidth = 75;
             this.dpiSelect.Enabled = false;
             this.dpiSelect.Name = "dpiSelect";
-            this.dpiSelect.Size = new System.Drawing.Size(75, 38);
+            this.dpiSelect.Size = new System.Drawing.Size(100, 38);
             this.dpiSelect.SelectedIndexChanged += new System.EventHandler(this.dpiSelect_SelectedIndexChanged);
+            this.dpiSelect.Leave += new System.EventHandler(this.dpiSelect_Leave);
             this.dpiSelect.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dpiSelect_KeyDown);
             this.dpiSelect.Validating += new System.ComponentModel.CancelEventHandler(this.dpiSelect_Validating);
             this.dpiSelect.Validated += new System.EventHandler(this.dpiSelect_Validated);

@@ -136,7 +136,7 @@
     <value>Масштаб: {0}%</value>
   </data>
   <data name="PrintAreaFmt" xml:space="preserve">
-    <value>Область печати: ЛВУ {0}, {1} px, размер: {2} x {3} px, {4} стр</value>
+    <value>Область печати: ЛВУ {0}, {1} px, размер {2} x {3} px, {4} стр</value>
   </data>
   <data name="Resolution" xml:space="preserve">
     <value>Разрешение:</value>
@@ -197,5 +197,11 @@
   </data>
   <data name="ProgramDescription" xml:space="preserve">
     <value>printPoster предназначен для печати в точно заданном масштабе изображений для последующей склейки: карт, плакатов, баннеров.</value>
+  </data>
+  <data name="SelectionFmt" xml:space="preserve">
+    <value>Ввделенная область: ЛВУ {0}, {1} px, размер {2} x {3} px, {4}</value>
+  </data>
+  <data name="NativeMark" xml:space="preserve">
+    <value> (исходное)</value>
   </data>
 </root>

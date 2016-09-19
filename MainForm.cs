@@ -110,6 +110,8 @@ namespace printPoster
         private void Scale(int scl, Point? zoomCenter = null)
         {
             var kOld = ScaleK;
+//            var m0 = panel1.HorizontalScroll.Maximum;
+
             if (zoomCenter == null)
             {
                 var rect = panel1.ClientRectangle;
@@ -117,7 +119,6 @@ namespace printPoster
             }
 
             var image = printDocument.Image;
-
 
             scale = scl < 0 ? 0 : scl;
 
@@ -130,6 +131,7 @@ namespace printPoster
 
             pictureBox1.Width = (int) Math.Round(image.Width / k);
             pictureBox1.Height = (int) Math.Round(image.Height / k);
+            
 
             /*if (k < 0.5m)
             {
@@ -145,12 +147,15 @@ namespace printPoster
             ScaleScroll(panel1.VerticalScroll, kOld, k, zoomCenter.Value.Y);
             ScaleScroll(panel1.HorizontalScroll, kOld, k, zoomCenter.Value.X);
 
+//            var m1 = panel1.HorizontalScroll.Maximum;
+  //          var h = panel1.HorizontalScroll.Value;
+
             zoomStatusLabel.Text = String.Format(R.ZoomFmt, Math.Round(100m/k, 2));
         }
 
         private void ScaleScroll(ScrollProperties sp, decimal kOld, decimal kNew, int picPos)
         {
-            if (!sp.Visible)
+            if (!sp.Visible || true)
                 return;
 
             decimal val = (picPos) * kOld / kNew - (picPos - sp.Value);
@@ -244,7 +249,12 @@ namespace printPoster
 
         private static string SizeText(Image im)
         {
-            return String.Format(R.SizeFmt, Math.Round(im.Width / im.HorizontalResolution * 2.54, 2), Math.Round(im.Height / im.VerticalResolution * 2.54, 2));
+            return SizeText(im.Size, im.HorizontalResolution, im.VerticalResolution);
+        }
+
+        private static string SizeText(Size sz, float horResolution, float verResolution)
+        {
+            return String.Format(R.SizeFmt, Math.Round(sz.Width / horResolution * 2.54, 2), Math.Round(sz.Height / verResolution * 2.54, 2));
         }
 
         #region print
@@ -335,11 +345,15 @@ namespace printPoster
         {
             var list = new List<string>(new[] { "100", "150", "200", "300", "600", "1200" });
 
+            string s = DpiText(dpi);
+            int i = list.IndexOf(s);
+            if (i >= 0)
+                list[i] = list[i] + R.NativeMark;
+            else
+                list.Insert(0, s + R.NativeMark);
+
             dpiSelect.Items.Clear();
             dpiSelect.Items.AddRange(list.ToArray());
-            string s = DpiText(dpi);
-            if (!list.Any(l => l == s))
-                dpiSelect.Items.Insert(0, s);
 
             //dpiSelect.ComboBox.FormatString = "G:4.2";
 
@@ -363,7 +377,14 @@ namespace printPoster
 
         private void dpiSelect_TextChanged(object sender, EventArgs e)
         {
+            int i = 6;
+        }
 
+        private void dpiSelect_Leave(object sender, EventArgs e)
+        {
+            float dpi;
+            if (TryGetDpi(out dpi))
+                UpdateDpi();
         }
 
         private void dpiSelect_Validating(object sender, CancelEventArgs e)
@@ -381,6 +402,9 @@ namespace printPoster
         {
             res = -1;
             var s = dpiSelect.Text;
+            if (s != null && s.EndsWith(R.NativeMark))
+                s = s.Replace(R.NativeMark, "");
+            
             return !String.IsNullOrEmpty(s) && (float.TryParse(s, out res) || float.TryParse(s.Replace('.', ','), out res)) && res > 0;
         }
         private void UpdateDpi()
@@ -424,6 +448,14 @@ namespace printPoster
 
             pictureBox1.Invalidate();
         }
+
+        private void SelectionText()
+        {
+            var dr = ViewCoord2DocCoord(selection, ScaleK);
+            var im = printDocument.Image;
+
+            printAreaLabel.Text = String.Format(R.SelectionFmt, dr.X, dr.Y, dr.Width, dr.Height, SizeText(dr.Size, im.HorizontalResolution, im.VerticalResolution));
+        } 
 
         private void SetPositionText(Point viewPos)
         {
@@ -492,6 +524,7 @@ namespace printPoster
             selection = Rectangle.Empty;
             start = e.Location;
 
+            SelectionText();
             pictureBox1.Invalidate();
         }
 
@@ -506,6 +539,7 @@ namespace printPoster
                 
             if (ScrollIfNeeded(e.Location))
             {
+                SelectionText();
                 pictureBox1.Invalidate();
                 return;
             }
@@ -514,6 +548,7 @@ namespace printPoster
             inv.Inflate(2, 2);
             inv.Offset(-1, -1);
 
+            SelectionText();
             pictureBox1.Invalidate(inv);
         }
 
@@ -566,5 +601,6 @@ namespace printPoster
             using (var dlg = new AboutBox())
                 dlg.ShowDialog();
         }
+
     }
 }

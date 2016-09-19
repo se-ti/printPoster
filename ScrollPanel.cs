@@ -48,6 +48,12 @@ namespace printPoster
             ZoomEvent(this, e);
         }
 
+        protected override void OnScroll(ScrollEventArgs se)
+        {
+            base.OnScroll(se);
+            var hs = HorizontalScroll;
+        }
+
         public class ZoomEventArgs : EventArgs
         {
             public int Delta { get; private set; }
