@@ -110,7 +110,8 @@ namespace printPoster
         private void Scale(int scl, Point? zoomCenter = null)
         {
             var kOld = ScaleK;
-//            var m0 = panel1.HorizontalScroll.Maximum;
+            var hsOld = panel1.HorizontalScroll.Value;
+            var vsOld = panel1.VerticalScroll.Value;
 
             if (zoomCenter == null)
             {
@@ -133,32 +134,30 @@ namespace printPoster
             pictureBox1.Height = (int) Math.Round(image.Height / k);
             
 
-            /*if (k < 0.5m)
+            if (k <= 0.5m)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBox1.Image = printDocument.Image;
             }
-            else*/
+            else
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
                 pictureBox1.Image = new Bitmap(printDocument.Image, pictureBox1.Size);
             }
 
-            ScaleScroll(panel1.VerticalScroll, kOld, k, zoomCenter.Value.Y);
-            ScaleScroll(panel1.HorizontalScroll, kOld, k, zoomCenter.Value.X);
-
-//            var m1 = panel1.HorizontalScroll.Maximum;
-  //          var h = panel1.HorizontalScroll.Value;
+            ScaleScroll(panel1.VerticalScroll, kOld, k, zoomCenter.Value.Y, vsOld);
+            ScaleScroll(panel1.HorizontalScroll, kOld, k, zoomCenter.Value.X, hsOld);
+            panel1.PerformLayout();
 
             zoomStatusLabel.Text = String.Format(R.ZoomFmt, Math.Round(100m/k, 2));
         }
 
-        private void ScaleScroll(ScrollProperties sp, decimal kOld, decimal kNew, int picPos)
+        private void ScaleScroll(ScrollProperties sp, decimal kOld, decimal kNew, int picPos, int oldScrollPos)
         {
-            if (!sp.Visible || true)
+            if (!sp.Visible)
                 return;
 
-            decimal val = (picPos) * kOld / kNew - (picPos - sp.Value);
+            decimal val = (picPos) * kOld / kNew - (picPos - oldScrollPos);
             sp.Value = Math.Min(Math.Max((int) val, sp.Minimum), sp.Maximum);
         }
 
@@ -247,16 +246,6 @@ namespace printPoster
             dpiSelect.Enabled = enable;
         }
 
-        private static string SizeText(Image im)
-        {
-            return SizeText(im.Size, im.HorizontalResolution, im.VerticalResolution);
-        }
-
-        private static string SizeText(Size sz, float horResolution, float verResolution)
-        {
-            return String.Format(R.SizeFmt, Math.Round(sz.Width / horResolution * 2.54, 2), Math.Round(sz.Height / verResolution * 2.54, 2));
-        }
-
         #region print
         private void OnPrintClick(object sender, EventArgs e)
         {
@@ -266,20 +255,8 @@ namespace printPoster
                 SetPrintAreaText();
 
                 var ps = pageSetupDlg.PrinterSettings;
-
-                NumPages = printDocument.GetNumPages(pageSetupDlg.PageSettings);
-                ps.MinimumPage = 1;
-                ps.MaximumPage = NumPages;
-                if (ps.FromPage < 1)
-                    ps.FromPage = 1;
-                if (ps.FromPage > NumPages)
-                    ps.FromPage = NumPages;
-
-                if (ps.ToPage < 1 || ps.ToPage > NumPages) 
-                    ps.ToPage = NumPages;
-                if (ps.ToPage < ps.FromPage)
-                    ps.ToPage = ps.FromPage;
-
+                UpdatePageRange(ps);
+                
                 printDlg.PrinterSettings = ps;
                 printDlg.AllowCurrentPage = false;
                 printDlg.AllowSomePages = true;
@@ -297,6 +274,28 @@ namespace printPoster
                 }
             }
 
+        }
+
+        private void UpdatePageRange(PrinterSettings ps)
+        {
+            NumPages = printDocument.GetNumPages(pageSetupDlg.PageSettings);
+            int oldMax = ps.MaximumPage;
+
+            ps.MinimumPage = 1;
+            ps.MaximumPage = NumPages;
+            if (ps.FromPage < 1)
+                ps.FromPage = 1;
+            if (ps.FromPage > NumPages)
+                ps.FromPage = NumPages;
+
+            if (ps.ToPage < 1 || ps.ToPage > NumPages)
+                ps.ToPage = NumPages;
+            if (ps.ToPage < ps.FromPage)
+                ps.ToPage = ps.FromPage;
+
+            if (ps.PrintRange == PrintRange.AllPages ||     
+                ps.PrintRange == PrintRange.SomePages && oldMax < ps.MaximumPage && ps.ToPage == oldMax && (ps.FromPage == 1 || ps.FromPage != oldMax)) // dialog doesn't show actual number of pages, so we should help user, expanding max range, if it seems user wanted to print all pages up to the end
+                ps.ToPage = ps.MaximumPage;
         }
 
         private void OnPageSetupClick(object sender, EventArgs e)
@@ -429,9 +428,9 @@ namespace printPoster
             sizeLabel.Text = String.Format("dpi, {0}", SizeText(printDocument.Image));
             SetPrintAreaText();
         }
-
         #endregion
 
+        #region various texts
         private static string DpiText(float dpi)
         {
             return String.Format("{0}", Math.Round(dpi, 2));
@@ -451,7 +450,9 @@ namespace printPoster
 
         private void SelectionText()
         {
-            var dr = ViewCoord2DocCoord(selection, ScaleK);
+            var r = pictureBox1.ClientRectangle;
+            r.Intersect(selection);
+            var dr = ViewCoord2DocCoord(r, ScaleK);
             var im = printDocument.Image;
 
             printAreaLabel.Text = String.Format(R.SelectionFmt, dr.X, dr.Y, dr.Width, dr.Height, SizeText(dr.Size, im.HorizontalResolution, im.VerticalResolution));
@@ -462,6 +463,17 @@ namespace printPoster
             var k = ScaleK;
             positionLabel.Text = String.Format("X: {0}, Y:{1}", (int)(viewPos.X * k), (int)(viewPos.Y * k));
         }
+
+        private static string SizeText(Image im)
+        {
+            return SizeText(im.Size, im.HorizontalResolution, im.VerticalResolution);
+        }
+
+        private static string SizeText(Size sz, float horResolution, float verResolution)
+        {
+            return String.Format(R.SizeFmt, Math.Round(sz.Width / horResolution * 2.54, 2), Math.Round(sz.Height / verResolution * 2.54, 2));
+        }
+        #endregion
 
         private void panel1_MouseEnter(object sender, EventArgs e)
         {
@@ -541,6 +553,7 @@ namespace printPoster
             {
                 SelectionText();
                 pictureBox1.Invalidate();
+                //panel1.PerformLayout();
                 return;
             }
 
@@ -567,13 +580,14 @@ namespace printPoster
             if (!sp.Visible)
                 return false;
 
-            const int limit = 20; 
+            const int limit = 20;
+            const int step = 20;
             int d2 = size - mousePos; // расстояние до второй границы
 
             if (mousePos < limit && d2 > mousePos && (mousePosPic < stPos || mousePosPic - stPos > limit ))
-                sp.Value = Math.Max(sp.Minimum, sp.Value - limit);
+                sp.Value = Math.Max(sp.Minimum, sp.Value - step);
             else if (d2 < limit && d2 < mousePos && (mousePosPic > stPos  || stPos - mousePosPic > limit))
-                sp.Value = Math.Min(sp.Maximum, sp.Value + limit);
+                sp.Value = Math.Min(sp.Maximum, sp.Value + step);
             else
                 return false;
 
