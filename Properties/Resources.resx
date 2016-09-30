@@ -204,4 +204,16 @@
   <data name="NativeMark" xml:space="preserve">
     <value> (native)</value>
   </data>
+  <data name="OverlapLbl" xml:space="preserve">
+    <value>Overlap (mm):</value>
+  </data>
+  <data name="ErrorParsingOverlap" xml:space="preserve">
+    <value>Error parsing overlap</value>
+  </data>
+  <data name="InvalidOverlap" xml:space="preserve">
+    <value>Invalid overlap</value>
+  </data>
+  <data name="OverlapTooBig" xml:space="preserve">
+    <value>Overlap couldn't be more, than page's mimimal dimension.</value>
+  </data>
 </root>

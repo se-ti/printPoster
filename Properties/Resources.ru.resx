@@ -178,7 +178,7 @@
     <value>По размеру окна</value>
   </data>
   <data name="ErrorParsingDpi" xml:space="preserve">
-    <value>Ошибка ввода dpi</value>
+    <value>Ошибка ввода разрешения</value>
   </data>
   <data name="NotAFloatFmt" xml:space="preserve">
     <value>'{0}' не является десятичной дробью</value>
@@ -203,5 +203,17 @@
   </data>
   <data name="NativeMark" xml:space="preserve">
     <value> (исходное)</value>
+  </data>
+  <data name="OverlapLbl" xml:space="preserve">
+    <value>Перекрытие (мм):</value>
+  </data>
+  <data name="ErrorParsingOverlap" xml:space="preserve">
+    <value>Ошибка ввода перекрытия</value>
+  </data>
+  <data name="InvalidOverlap" xml:space="preserve">
+    <value>Недопустимое перекрытие</value>
+  </data>
+  <data name="OverlapTooBig" xml:space="preserve">
+    <value>Перекрытие не может быть больше короткой стороны страницы.</value>
   </data>
 </root>

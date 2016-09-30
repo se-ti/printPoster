@@ -7,8 +7,14 @@ using System.Linq;
 
 /// todo
 /// icon 
-/// ++- localization -- дожать в 1 файл -- подгружать нужные ресурсы    http://stackoverflow.com/questions/10137937/merge-dll-into-exe  https://www.microsoft.com/en-us/download/details.aspx?id=17630
+/// версию в заголовок
 /// инструмент линейка
+/// отрисовка перекрытия
+
+/// ++- localization -- дожать в 1 файл -- подгружать нужные ресурсы    http://stackoverflow.com/questions/10137937/merge-dll-into-exe  https://www.microsoft.com/en-us/download/details.aspx?id=17630
+/// check for update
+/// win32, определяться c имеющимся .Net Framework -- а надо?
+/// installer или дожать в 1 файл?
 
 /// чистка кода
 /// правильный подсчет страниц при смене принтера
@@ -16,14 +22,12 @@ using System.Linq;
 /// 
 /// rotate image
 /// плоттеры и печать на рулоне
-/// check for update
-/// win32, определяться c имеющимся .Net Framework -- а надо?
-/// installer или дожать в 1 файл?
 /// +- about
 /// +- command line params
 /// +- и таки корректная работа с рамками  // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
 /// +- разобраться, какие поля тащим из настроек принтера!   
 
+/// ++ overlap
 /// ++ правильный подсчет страниц при смене разрешения и т.п. (было 5, стало больше)
 /// ++ рассинхронизация скролла и картинки
 /// ++ память на больших зумах

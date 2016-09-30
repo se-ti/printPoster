@@ -77,6 +77,8 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.dpiSelect = new System.Windows.Forms.ToolStripComboBox();
             this.sizeLabel = new System.Windows.Forms.ToolStripLabel();
+            this.overlapLabel = new System.Windows.Forms.ToolStripLabel();
+            this.overlap = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -424,6 +426,8 @@
             this.toolStripLabel1,
             this.dpiSelect,
             this.sizeLabel,
+            this.overlapLabel,
+            this.overlap,
             this.toolStripSeparator1,
             this.printToolStripButton,
             this.toolStripSeparator8,
@@ -505,6 +509,24 @@
             this.sizeLabel.Name = "sizeLabel";
             this.sizeLabel.Size = new System.Drawing.Size(24, 35);
             this.sizeLabel.Text = "dpi";
+            // 
+            // overlapLabel
+            // 
+            this.overlapLabel.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.overlapLabel.Name = "overlapLabel";
+            this.overlapLabel.Size = new System.Drawing.Size(84, 35);
+            this.overlapLabel.Text = global::printPoster.Properties.Resources.OverlapLbl;
+            // 
+            // overlap
+            // 
+            this.overlap.Enabled = false;
+            this.overlap.MaxLength = 6;
+            this.overlap.Name = "overlap";
+            this.overlap.Size = new System.Drawing.Size(50, 38);
+            this.overlap.Leave += new System.EventHandler(this.overlap_Leave);
+            this.overlap.KeyDown += new System.Windows.Forms.KeyEventHandler(this.overlap_KeyDown);
+            this.overlap.Validating += new System.ComponentModel.CancelEventHandler(this.overlap_Validating);
+            this.overlap.Validated += new System.EventHandler(this.overlap_Validated);
             // 
             // toolStripSeparator1
             // 
@@ -685,6 +707,8 @@
         private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoomToWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripTextBox overlap;
+        private System.Windows.Forms.ToolStripLabel overlapLabel;
     }
 }
 

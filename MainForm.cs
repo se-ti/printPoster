@@ -47,12 +47,15 @@ namespace printPoster
             try
             {
                 printDocument.Load(path, title);
-
                 Image im = printDocument.Image;
                 ZoomToFit(im.Size);
 
                 this.Text = String.Format("{0}, {1} x {2} px", title, im.Width, im.Height);
+                printDocument.Overlap = 0;
+                SetOverlapText(0);
+
                 SetupResolutions(im.VerticalResolution);
+
                 TuneMenu(true);
             }
             catch (Exception ex)
@@ -244,6 +247,7 @@ namespace printPoster
             zoomToWindowToolStripMenuItem.Enabled = enable;
 
             dpiSelect.Enabled = enable;
+            overlap.Enabled = enable;
         }
 
         #region print
@@ -344,7 +348,7 @@ namespace printPoster
         {
             var list = new List<string>(new[] { "100", "150", "200", "300", "600", "1200" });
 
-            string s = DpiText(dpi);
+            string s = Float2Text(dpi);
             int i = list.IndexOf(s);
             if (i >= 0)
                 list[i] = list[i] + R.NativeMark;
@@ -399,13 +403,13 @@ namespace printPoster
 
         private bool TryGetDpi(out float res)
         {
-            res = -1;
             var s = dpiSelect.Text;
             if (s != null && s.EndsWith(R.NativeMark))
                 s = s.Replace(R.NativeMark, "");
-            
-            return !String.IsNullOrEmpty(s) && (float.TryParse(s, out res) || float.TryParse(s.Replace('.', ','), out res)) && res > 0;
+
+            return TryParseFloat(s, out res);
         }
+
         private void UpdateDpi()
         {
             float dpi;
@@ -421,7 +425,7 @@ namespace printPoster
 
         private void SetDpiText(float dpi)
         {
-            var txt = DpiText(dpi);
+            var txt = Float2Text(dpi);
             if (txt != dpiSelect.Text)
                 dpiSelect.Text = txt;
 
@@ -430,10 +434,91 @@ namespace printPoster
         }
         #endregion
 
-        #region various texts
-        private static string DpiText(float dpi)
+        #region overlap
+        private void overlap_KeyDown(object sender, KeyEventArgs e)
         {
-            return String.Format("{0}", Math.Round(dpi, 2));
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            UpdateOverlap();
+            panel1.Focus();
+        }
+
+        private void overlap_Leave(object sender, EventArgs e)
+        {
+            float o;
+            if (TryParseOverlap(out o))
+                UpdateOverlap();
+        }
+
+
+        private void overlap_Validating(object sender, CancelEventArgs e)
+        {
+            float ovrl;
+            e.Cancel = !TryParseOverlap(out ovrl);
+        }
+
+        private bool TryParseOverlap(out float ovrl)
+        {
+            var s = overlap.Text;
+            if (String.IsNullOrEmpty(s) || s.Trim() == String.Empty)
+            {
+                ovrl = .0f;
+                return true;
+            }
+
+            if (!TryParseFloat(s, out ovrl) && ovrl != .0f)
+                return false;
+
+            if (ovrl * 100 / 25.4 >= Math.Min(PageSize.Width, PageSize.Height))
+                return false;
+
+            return true;
+        }
+
+        private void overlap_Validated(object sender, EventArgs e)
+        {
+            UpdateOverlap();
+        }
+
+        private void UpdateOverlap()
+        {
+            float o;
+            if (!TryParseOverlap(out o))
+            {
+                if (o < 0)
+                    ShowError(R.ErrorParsingOverlap, String.Format(R.NotAFloatFmt, overlap.Text));
+                else
+                    ShowError(R.InvalidOverlap, R.OverlapTooBig);
+
+                return;
+            }
+
+            printDocument.Overlap = o;
+            SetOverlapText(o);
+        }
+
+        private void SetOverlapText(float ovrl)
+        {
+            var txt = Float2Text(ovrl);
+            if (txt != overlap.Text)
+                overlap.Text = txt;
+
+            SetPrintAreaText();
+        }
+
+        #endregion
+
+        #region various texts
+        private static bool TryParseFloat(string s, out float res)
+        {
+            res = -1;
+            return !String.IsNullOrEmpty(s) && (float.TryParse(s, out res) || float.TryParse(s.Replace('.', ','), out res)) && res > 0;
+        }
+
+        private static string Float2Text(float val)
+        {
+            return String.Format("{0}", Math.Round(val, 2));
         }
 
         private void SetPrintAreaText()
@@ -487,7 +572,6 @@ namespace printPoster
                 return;
 
             var k = ScaleK;
-            var pen = new Pen(Color.Blue, 2);
             // pages
 
             var clipRec = new RectangleF(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
@@ -500,13 +584,26 @@ namespace printPoster
                     rects.Add(i, RectangleF.Intersect(bRect, rf));
             }
 
+            var pen = new Pen(Color.Blue, 2);
             if (rects.Any())
             {
-                e.Graphics.DrawRectangles(pen, rects.Values.ToArray());
+                if (printDocument.Overlap > 0.001)
+                {
+                    e.Graphics.DrawRectangles(pen, rects.Where(p => p.Key % 2 == 0).Select(p => p.Value).ToArray());
+                    pen.Color = Color.Cyan;
+                    e.Graphics.DrawRectangles(pen, rects.Where(p => p.Key % 2 == 1).Select(p => p.Value).ToArray());
+                    pen.Color = Color.Blue;
+                }
+                else
+                    e.Graphics.DrawRectangles(pen, rects.Values.ToArray());
 
                 int ln;
                 int chr;
                 var sf = StringFormat.GenericDefault;
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+
+                SizeF textSz;
 
                 using (var f = new Font("Sans serif", 15))
                     using (var brush = new SolidBrush(Color.Blue))
@@ -514,8 +611,14 @@ namespace printPoster
                         {
                             var s = String.Format(R.PageFmt, key + 1);
 
-                            e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
-                            e.Graphics.DrawString(ln > 1 || chr < s.Length ? String.Format("{0}", key + 1) : s, f, brush, rects[key], sf);
+                            textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                            if (ln > 1 || chr < s.Length)
+                            {
+                                s = String.Format("{0}", key + 1);
+                                textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                            }
+
+                            e.Graphics.DrawString(s, f, brush, rects[key], sf);
                         }
             }
             
@@ -615,6 +718,5 @@ namespace printPoster
             using (var dlg = new AboutBox())
                 dlg.ShowDialog();
         }
-
     }
 }

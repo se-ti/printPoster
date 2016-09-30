@@ -97,6 +97,15 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error parsing overlap.
+        /// </summary>
+        internal static string ErrorParsingOverlap {
+            get {
+                return ResourceManager.GetString("ErrorParsingOverlap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E&amp;xit.
         /// </summary>
         internal static string Exit {
@@ -133,6 +142,15 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid overlap.
+        /// </summary>
+        internal static string InvalidOverlap {
+            get {
+                return ResourceManager.GetString("InvalidOverlap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  (native).
         /// </summary>
         internal static string NativeMark {
@@ -156,6 +174,24 @@ namespace printPoster.Properties {
         internal static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overlap (mm):.
+        /// </summary>
+        internal static string OverlapLbl {
+            get {
+                return ResourceManager.GetString("OverlapLbl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overlap couldn&apos;t be more, than page&apos;s mimimal dimension..
+        /// </summary>
+        internal static string OverlapTooBig {
+            get {
+                return ResourceManager.GetString("OverlapTooBig", resourceCulture);
             }
         }
         

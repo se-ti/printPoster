@@ -18,6 +18,7 @@ namespace printPoster
             image = (Bitmap)Bitmap.FromFile(fileName);
             DocumentName = String.IsNullOrEmpty(title) ? fileName : title;
             PrintArea = Rectangle.Empty;
+            Overlap = 0; //mm
         }
 
         public void SetImage(Bitmap im)
@@ -31,6 +32,8 @@ namespace printPoster
         {
             image.SetResolution(dpi, dpi);
         }
+
+        public float Overlap { get; set; } // mm todo: range check!
 
         public Rectangle PrintArea
         {
@@ -144,24 +147,30 @@ namespace printPoster
             float w = pxToInchHdth(PrintArea.Width, image.HorizontalResolution);
             float h = pxToInchHdth(PrintArea.Height, image.VerticalResolution);
 
-            var cols = Math.Ceiling(w / pageSz.Width);
-            var rows = Math.Ceiling(h / pageSz.Height);
+            float ovrl = Overlap * 100 / 25.4f; // mm to inch / 100
+
+            var cols = Math.Ceiling((w-ovrl) / (pageSz.Width - ovrl));
+            var rows = Math.Ceiling((h-ovrl) / (pageSz.Height - ovrl));
 
             return (int)(cols * rows);
         }
 
         public Rectangle GetSrcRect(int page, Size pageSz)
         {
-            Size pxSize = new Size(InchHdthToPx(pageSz.Width, image.VerticalResolution),
-                                   InchHdthToPx(pageSz.Height, image.HorizontalResolution));
+            Size pxSize = new Size(InchHdthToPx(pageSz.Width, image.HorizontalResolution),
+                                   InchHdthToPx(pageSz.Height, image.VerticalResolution));
 
-            int nCol = (PrintArea.Width + pxSize.Width - 1) / pxSize.Width;
+            int horOvrl = (int) Math.Floor(Overlap * image.HorizontalResolution / 25.4);
+            int vertOvrl = (int)Math.Floor(Overlap * image.HorizontalResolution / 25.4);
+
+            // todo а если перекрытие больше ширины страницы?
+            int nCol = (PrintArea.Width - horOvrl  + pxSize.Width - horOvrl - 1) / (pxSize.Width - horOvrl);
 
             int row = page / nCol;
             int col = page % nCol;
 
-            int x = col * pxSize.Width;
-            int y = row * pxSize.Height;
+            int x = col * (pxSize.Width - horOvrl);
+            int y = row * (pxSize.Height - vertOvrl);
 
             return new Rectangle(x + PrintArea.X, y + PrintArea.Y,
                 x + pxSize.Width < PrintArea.Width ? pxSize.Width : PrintArea.Width - x,
