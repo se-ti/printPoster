@@ -274,9 +274,9 @@ namespace printPoster
                 if (dialogRes == DialogResult.OK || dialogRes != DialogResult.Cancel)
                 {
                     ps = printDlg.PrinterSettings; // todo а если сменился принтер и т.п.?
-                    printDocument.PrinterSettings = ps;
-                    printDocument.DefaultPageSettings = ps.PrinterName == pageSetupDlg.PrinterSettings.PrinterName ? pageSetupDlg.PageSettings : ps.DefaultPageSettings;
-                    if (dialogRes == DialogResult.OK)
+                    bool consistentOverlap = PageSetupSucceed(ps, ps.PrinterName == pageSetupDlg.PrinterSettings.PrinterName ? pageSetupDlg.PageSettings : ps.DefaultPageSettings);
+
+                    if (dialogRes == DialogResult.OK && consistentOverlap)
                         printDocument.Start();
                     else
                         SetPrintAreaText();
@@ -312,11 +312,27 @@ namespace printPoster
             PrePageSetup();
             if (pageSetupDlg.ShowDialog() == DialogResult.OK)
             {
-                printDocument.PrinterSettings = pageSetupDlg.PrinterSettings;
-                printDocument.DefaultPageSettings = pageSetupDlg.PageSettings;
-
+                PageSetupSucceed(pageSetupDlg.PrinterSettings, pageSetupDlg.PageSettings);
                 SetPrintAreaText();
             }
+        }
+
+        private bool PageSetupSucceed(PrinterSettings ps, PageSettings pageSett)
+        {
+            printDocument.PrinterSettings = ps;
+            printDocument.DefaultPageSettings = pageSett;
+
+            PageSize = MapPrintDocument.GetPageSize(pageSett);
+            if (OverlapSmallEnough(printDocument.Overlap))
+                return true;
+
+            float ovrl = (float) Math.Floor(Math.Min(PageSize.Width, PageSize.Height) * 25.4 / 100 / 4); // 1/4 of 
+            printDocument.Overlap = ovrl;
+            overlap.Text = Float2Text(ovrl);
+
+            MessageBox.Show(R.OverlapAdjusted, R.WarningTitle, MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            return false;
         }
 
         private void PrePageSetup()
@@ -383,11 +399,6 @@ namespace printPoster
             panel1.Focus();
         }
 
-        private void dpiSelect_TextChanged(object sender, EventArgs e)
-        {
-            int i = 6;
-        }
-
         private void dpiSelect_Leave(object sender, EventArgs e)
         {
             float dpi;
@@ -440,6 +451,7 @@ namespace printPoster
         #endregion
 
         #region overlap
+
         private void overlap_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)
@@ -475,10 +487,12 @@ namespace printPoster
             if (!TryParseFloat(s, out ovrl) && ovrl != .0f)
                 return false;
 
-            if (ovrl * 100 / 25.4 >= Math.Min(PageSize.Width, PageSize.Height))
-                return false;
+            return OverlapSmallEnough(ovrl);
+        }
 
-            return true;
+        private bool OverlapSmallEnough(float ovrl)
+        {
+            return ovrl * 100 / 25.4 < Math.Min(PageSize.Width, PageSize.Height);
         }
 
         private void overlap_Validated(object sender, EventArgs e)

@@ -502,7 +502,6 @@
             this.dpiSelect.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dpiSelect_KeyDown);
             this.dpiSelect.Validating += new System.ComponentModel.CancelEventHandler(this.dpiSelect_Validating);
             this.dpiSelect.Validated += new System.EventHandler(this.dpiSelect_Validated);
-            this.dpiSelect.TextChanged += new System.EventHandler(this.dpiSelect_TextChanged);
             // 
             // sizeLabel
             // 
@@ -581,7 +580,7 @@
             // 
             this.positionLabel.Margin = new System.Windows.Forms.Padding(0, 3, 20, 2);
             this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(602, 17);
+            this.positionLabel.Size = new System.Drawing.Size(633, 17);
             this.positionLabel.Spring = true;
             this.positionLabel.Text = "X: Y:";
             this.positionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

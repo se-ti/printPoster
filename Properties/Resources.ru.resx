@@ -216,4 +216,10 @@
   <data name="OverlapTooBig" xml:space="preserve">
     <value>Перекрытие не может быть больше короткой стороны страницы.</value>
   </data>
+  <data name="WarningTitle" xml:space="preserve">
+    <value>Внимание!</value>
+  </data>
+  <data name="OverlapAdjusted" xml:space="preserve">
+    <value>Перекрытие было изменено, чтобы соответствовать размерам страницы.</value>
+  </data>
 </root>

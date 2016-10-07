@@ -214,6 +214,12 @@
     <value>Invalid overlap</value>
   </data>
   <data name="OverlapTooBig" xml:space="preserve">
-    <value>Overlap couldn't be more, than page's mimimal dimension.</value>
+    <value>Overlap shouldn't exceed page's mimimal dimension.</value>
+  </data>
+  <data name="WarningTitle" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="OverlapAdjusted" xml:space="preserve">
+    <value>Overlap was adjusted to fit page size.</value>
   </data>
 </root>
