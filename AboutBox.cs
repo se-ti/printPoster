@@ -38,7 +38,7 @@ namespace printPoster
             }
         }
 
-        public string AssemblyVersion
+        public static string AssemblyVersion
         {
             get
             {
@@ -59,7 +59,7 @@ namespace printPoster
             }
         }
 
-        public string AssemblyProduct
+        public static string AssemblyProduct
         {
             get
             {

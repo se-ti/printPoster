@@ -241,7 +241,7 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print area top left: {0}, {1} px, Print rectangle size: {2} x {3} px, {4} pages.
+        ///   Looks up a localized string similar to Print zone: top left: {0}, {1} px, size: {2} x {3} px, {4} pages.
         /// </summary>
         internal static string PrintAreaFmt {
             get {

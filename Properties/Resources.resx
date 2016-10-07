@@ -136,7 +136,7 @@
     <value>Zoom: {0}%</value>
   </data>
   <data name="PrintAreaFmt" xml:space="preserve">
-    <value>Print area top left: {0}, {1} px, Print rectangle size: {2} x {3} px, {4} pages</value>
+    <value>Print zone: top left: {0}, {1} px, size: {2} x {3} px, {4} pages</value>
   </data>
   <data name="Resolution" xml:space="preserve">
     <value>Resolution:</value>

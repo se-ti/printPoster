@@ -575,14 +575,13 @@
             // printAreaLabel
             // 
             this.printAreaLabel.Name = "printAreaLabel";
-            this.printAreaLabel.Size = new System.Drawing.Size(60, 17);
-            this.printAreaLabel.Text = global::printPoster.Properties.Resources.PrintArea;
+            this.printAreaLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // positionLabel
             // 
             this.positionLabel.Margin = new System.Windows.Forms.Padding(0, 3, 20, 2);
             this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(573, 17);
+            this.positionLabel.Size = new System.Drawing.Size(602, 17);
             this.positionLabel.Spring = true;
             this.positionLabel.Text = "X: Y:";
             this.positionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -633,7 +632,7 @@
             this.Controls.Add(this.statusStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CMainForm";
-            this.Text = "print poster";
+            this.Text = "printPoster 0.4.6.0";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

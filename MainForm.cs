@@ -10,6 +10,7 @@ using System.Text;
 
 using R = printPoster.Properties.Resources;
 using System.Drawing.Printing;
+using System.Drawing.Drawing2D;
 
 namespace printPoster
 {
@@ -24,6 +25,8 @@ namespace printPoster
         Rectangle selection;
         Point start;
 
+        Cursor crossHair;
+
         public CMainForm()
         {
             InitializeComponent();
@@ -34,6 +37,8 @@ namespace printPoster
 
             const int defMargins = (int) (10 * 100 / 25.4m) + 1; // 10mm in 1/100 of the inch
             printDocument.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(defMargins, defMargins, defMargins, defMargins);
+
+            crossHair = new Cursor(GetType(), "crosshair.cur");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,7 +55,7 @@ namespace printPoster
                 Image im = printDocument.Image;
                 ZoomToFit(im.Size);
 
-                this.Text = String.Format("{0}, {1} x {2} px", title, im.Width, im.Height);
+                this.Text = String.Format("{0}, {1} x {2} px - {3} {4}", title, im.Width, im.Height, AboutBox.AssemblyProduct, AboutBox.AssemblyVersion);
                 printDocument.Overlap = 0;
                 SetOverlapText(0);
 
@@ -587,12 +592,26 @@ namespace printPoster
             var pen = new Pen(Color.Blue, 2);
             if (rects.Any())
             {
-                if (printDocument.Overlap > 0.001)
+                bool hasOverlap = printDocument.Overlap > 0.001;
+                int nCol = printDocument.GetNumColumns(PageSize);
+
+                Color odd = Color.Blue;
+                Color even = Color.FromArgb(255, 0, 0xd0, 0xd0); // Color.Cyan
+
+                if (hasOverlap) 
                 {
-                    e.Graphics.DrawRectangles(pen, rects.Where(p => p.Key % 2 == 0).Select(p => p.Value).ToArray());
-                    pen.Color = Color.Cyan;
-                    e.Graphics.DrawRectangles(pen, rects.Where(p => p.Key % 2 == 1).Select(p => p.Value).ToArray());
-                    pen.Color = Color.Blue;
+                    int alpha = 80;
+                    int hue = 0xf0;
+                    using (var brush = new SolidBrush(Color.FromArgb(alpha, hue, hue, hue + 15)))
+                        foreach (var r in rects.Reverse())  // чтобы страницы ложились сверху-вниз, слева-направо
+                        {
+                            var rectArr = new RectangleF[] { r.Value };
+                        
+                            e.Graphics.FillRectangles( brush, rectArr);
+
+                            pen.Color = ((r.Key % nCol + r.Key / nCol) % 2 == 0) ? odd : even; // chessboard
+                            e.Graphics.DrawRectangles(pen, rectArr);
+                        }
                 }
                 else
                     e.Graphics.DrawRectangles(pen, rects.Values.ToArray());
@@ -618,6 +637,8 @@ namespace printPoster
                                 textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
                             }
 
+                            if (hasOverlap)
+                                brush.Color = ((key % nCol + key / nCol) % 2 == 0) ? odd : even; // chessboard
                             e.Graphics.DrawString(s, f, brush, rects[key], sf);
                         }
             }
@@ -639,6 +660,7 @@ namespace printPoster
             selection = Rectangle.Empty;
             start = e.Location;
 
+            pictureBox1.Cursor = crossHair;
             SelectionText();
             pictureBox1.Invalidate();
         }
@@ -701,6 +723,8 @@ namespace printPoster
         {            
             if (start.IsEmpty)
                 return;
+
+            pictureBox1.Cursor = Cursors.Default;
 
             selection = RectFromPoints(start, e.Location);
             // deselect on small

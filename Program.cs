@@ -7,9 +7,9 @@ using System.Linq;
 
 /// todo
 /// icon 
-/// версию в заголовок
 /// инструмент линейка
-/// отрисовка перекрытия
+/// проверять допустимость перекрытия при смене printArea
+/// контуры под словами Page 1 - Page 2  drawstring outline
 
 /// ++- localization -- дожать в 1 файл -- подгружать нужные ресурсы    http://stackoverflow.com/questions/10137937/merge-dll-into-exe  https://www.microsoft.com/en-us/download/details.aspx?id=17630
 /// check for update
@@ -27,6 +27,8 @@ using System.Linq;
 /// +- и таки корректная работа с рамками  // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
 /// +- разобраться, какие поля тащим из настроек принтера!   
 
+/// ++ отрисовка перекрытия
+/// ++ версию в заголовок
 /// ++ overlap
 /// ++ правильный подсчет страниц при смене разрешения и т.п. (было 5, стало больше)
 /// ++ рассинхронизация скролла и картинки

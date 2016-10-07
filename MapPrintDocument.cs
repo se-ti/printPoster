@@ -141,18 +141,29 @@ namespace printPoster
 
         public int GetNumPages(Size pageSz)
         {
+            return GetNumColumns(pageSz) * GetNumRows(pageSz);
+        }
+
+        public int GetNumColumns(Size pageSz)
+        {
             if (pageSz.IsEmpty)
                 return 0;
 
             float w = pxToInchHdth(PrintArea.Width, image.HorizontalResolution);
-            float h = pxToInchHdth(PrintArea.Height, image.VerticalResolution);
-
             float ovrl = Overlap * 100 / 25.4f; // mm to inch / 100
 
-            var cols = Math.Ceiling((w-ovrl) / (pageSz.Width - ovrl));
-            var rows = Math.Ceiling((h-ovrl) / (pageSz.Height - ovrl));
+            return (int) Math.Ceiling((w - ovrl) / (pageSz.Width - ovrl));
+        }
 
-            return (int)(cols * rows);
+        public int GetNumRows(Size pageSz)
+        {
+            if (pageSz.IsEmpty)
+                return 0;
+
+            float h = pxToInchHdth(PrintArea.Height, image.VerticalResolution);
+            float ovrl = Overlap * 100 / 25.4f; // mm to inch / 100
+
+            return (int)Math.Ceiling((h - ovrl) / (pageSz.Height - ovrl));
         }
 
         public Rectangle GetSrcRect(int page, Size pageSz)
