@@ -178,6 +178,15 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overlap was adjusted to fit page size..
+        /// </summary>
+        internal static string OverlapAdjusted {
+            get {
+                return ResourceManager.GetString("OverlapAdjusted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overlap (mm):.
         /// </summary>
         internal static string OverlapLbl {
@@ -187,7 +196,7 @@ namespace printPoster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overlap couldn&apos;t be more, than page&apos;s mimimal dimension..
+        ///   Looks up a localized string similar to Overlap shouldn&apos;t exceed page&apos;s mimimal dimension..
         /// </summary>
         internal static string OverlapTooBig {
             get {
@@ -300,6 +309,15 @@ namespace printPoster.Properties {
         internal static string View {
             get {
                 return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning!.
+        /// </summary>
+        internal static string WarningTitle {
+            get {
+                return ResourceManager.GetString("WarningTitle", resourceCulture);
             }
         }
         

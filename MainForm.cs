@@ -637,24 +637,41 @@ namespace printPoster
                 sf.LineAlignment = StringAlignment.Center;
 
                 SizeF textSz;
+                
 
-                using (var f = new Font("Sans serif", 15))
-                    using (var brush = new SolidBrush(Color.Blue))
-                        foreach (var key in rects.Keys)
-                        {
-                            var s = String.Format(R.PageFmt, key + 1);
+                const int fSize = 15;
+                float emSize = e.Graphics.DpiY * fSize / 72 - 1;
 
-                            textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
-                            if (ln > 1 || chr < s.Length)
+                pen.Color = Color.White;
+                pen.Width = 5;
+                pen.LineJoin = LineJoin.Round;
+
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+
+                using (var gp = new GraphicsPath())
+                    using (var f = new Font("Sans serif", 15))
+                        using (var brush = new SolidBrush(Color.Blue))
+                            foreach (var key in rects.Keys)
                             {
-                                s = String.Format("{0}", key + 1);
-                                textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
-                            }
+                                var s = String.Format(R.PageFmt, key + 1);
 
-                            if (hasOverlap)
-                                brush.Color = ((key % nCol + key / nCol) % 2 == 0) ? odd : even; // chessboard
-                            e.Graphics.DrawString(s, f, brush, rects[key], sf);
-                        }
+                                textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                                if (ln > 1 || chr < s.Length)
+                                {
+                                    s = String.Format("{0}", key + 1);
+                                    textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                                }
+
+                                if (hasOverlap)
+                                    brush.Color = ((key % nCol + key / nCol) % 2 == 0) ? odd : even; // chessboard
+
+                                gp.Reset();
+                                gp.AddString(s, f.FontFamily, (int)FontStyle.Regular, emSize, rects[key], sf);
+                                e.Graphics.DrawPath(pen, gp);
+                                e.Graphics.FillPath(brush, gp);
+                            }
             }
             
 
