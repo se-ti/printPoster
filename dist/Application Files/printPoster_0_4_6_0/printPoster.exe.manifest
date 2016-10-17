@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="printPoster.exe" version="0.4.6.0" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="Properties\icon2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="printPoster" version="0.4.6.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="printPoster.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Sentinel.v3.5Client" version="3.5.0.0" publicKeyToken="b03f5f7f11d50a3a" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Core" version="3.5.0.0" publicKeyToken="b77a5c561934e089" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="WindowsBase" version="3.0.0.0" publicKeyToken="31bf3856ad364e35" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="printPoster.exe" size="101248">
+      <assemblyIdentity name="printPoster" version="0.4.6.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>h1pCGep3+jSeZslgQJVdRs8S6X8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ru\printPoster.resources.dll" size="6144">
+      <assemblyIdentity name="printPoster.resources" version="0.4.6.0" language="ru" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>LM56zoXiClT1B9JvE0aYUzJ5o64=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="printPoster.exe.config" size="170">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>VldYwwXMrbu9PaDoFhZP9AKKFLM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Properties\icon2.ico" size="7886">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>nTJxpnSNi5Cwnof78BA2R3gwyX8=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=WS-WS\titov" issuerKeyHash="d5e896d099d91b494e12336282a411b2b958e1e5" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>LQR7c+3jHplke70txmGv2j5Ioeg=</DigestValue></Reference></SignedInfo><SignatureValue>L8l7m6aptIzWKH5FqsZ7OcV6wvW5toeza4c6C+GbAKzwA43/jgr9tXMZ9wiDSkb83ITuB0iCkDxjhZsvtYWmeHRIk3A1WGW6DulXqFcTPmtT29VvnVDPDhMzVDDP2EEOdX0VVlZ2YLcqiFaKoT1aPQZjWv6d/FrTybvNgfUsV2s=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="e8a1483edaaf61c62dbd7b64991ee3ed737b042d" Description="" Url=""><as:assemblyIdentity name="printPoster.exe" version="0.4.6.0" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WS-WS\titov</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>6/vTk7kB+DHnjMNqZDlBsW2o5uc=</DigestValue></Reference></SignedInfo><SignatureValue>sMh3HuhJQ4PUJVP2xCEzd99yytZcOA8aGOy/4AQNBaLDSPkuF4fzOHPmjMpCiA9w4ZilnY/QL7I/LqYz9ctX3tymY1djeM1w9TSQMGUFIsAKwW1r82zpoAzkQi1MLiS813CEOxAak97vdoU2iQCqnjPbW031g2hSiYDji3fiwz4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBxTCCAS6gAwIBAgIQHNWlCPlA+aJHgX/eNXpcKjANBgkqhkiG9w0BAQUFADAhMR8wHQYDVQQDHhYAVwBTAC0AVwBTAFwAdABpAHQAbwB2MB4XDTE2MDkyNjEzMzYyMVoXDTE3MDkyNjE5MzYyMVowITEfMB0GA1UEAx4WAFcAUwAtAFcAUwBcAHQAaQB0AG8AdjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHckCAwEAATANBgkqhkiG9w0BAQUFAAOBgQCI2pfPawApD3H6R2HXL4bkEk0oTLXsY2HGVVfVyuFMHN5sk3N1Odi/a97OwxnbGweMkGEpI/do5bs3l6ltHbanKZjCDVlohz0uLYuSAAKXLPA5NoKmzn/QUO1v0dtVeJmQIRbNVNAUSXCbie0n+yQwsGusbOmts3gfMRmuAywW5w==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

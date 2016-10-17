@@ -6,25 +6,24 @@ using System.IO;
 using System.Linq;
 
 /// todo
-/// icon 
+/// -+ icon 
+/// +- about
 /// инструмент линейка
+/// rotate image
+
+/// чистка кода
+/// правильный подсчет страниц при смене принтера (разные physical dimensions)
+/// +- mark native resolution
+/// плоттеры и печать на рулоне
+
+/// +- command line params
+/// +- и таки корректная работа с рамками  // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
+/// +- разобраться, какие поля тащим из настроек принтера!   
 
 /// ++- localization -- дожать в 1 файл -- подгружать нужные ресурсы    http://stackoverflow.com/questions/10137937/merge-dll-into-exe  https://www.microsoft.com/en-us/download/details.aspx?id=17630
 /// check for update
 /// win32, определяться c имеющимся .Net Framework -- а надо?
 /// installer или дожать в 1 файл?
-
-/// чистка кода
-/// правильный подсчет страниц при смене принтера (разные physical dimensions)
-/// +- mark native resolution
-/// 
-/// rotate image
-/// плоттеры и печать на рулоне
-/// +- about
-/// +- command line params
-/// +- и таки корректная работа с рамками  // http://stackoverflow.com/questions/8761633/how-to-find-the-actual-printable-area-printdocument
-/// +- разобраться, какие поля тащим из настроек принтера!   
-
 /// ++ контуры под словами Page 1 - Page 2  drawstring outline
 /// ++ проверять допустимость перекрытия при смене printArea
 /// ++ отрисовка перекрытия
