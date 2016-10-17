@@ -590,9 +590,8 @@ namespace printPoster
             if (im == null)
                 return;
 
-            var k = ScaleK;
             // pages
-
+            var k = ScaleK;
             var clipRec = new RectangleF(e.ClipRectangle.X, e.ClipRectangle.Y, e.ClipRectangle.Width, e.ClipRectangle.Height);
             var bRect = new RectangleF(0, 0, pictureBox1.Width, pictureBox1.Height);
             Dictionary<int, RectangleF> rects = new Dictionary<int, RectangleF>();
@@ -605,84 +604,87 @@ namespace printPoster
 
             var pen = new Pen(Color.Blue, 2);
             if (rects.Any())
-            {
-                bool hasOverlap = printDocument.Overlap > 0.001;
-                int nCol = printDocument.GetNumColumns(PageSize);
+                DrawPages(e.Graphics, rects, pen);
 
-                Color odd = Color.Blue;
-                Color even = Color.FromArgb(255, 0, 0xd0, 0xd0); // Color.Cyan
-
-                if (hasOverlap) 
-                {
-                    int alpha = 80;
-                    int hue = 0xf0;
-                    using (var brush = new SolidBrush(Color.FromArgb(alpha, hue, hue, hue + 15)))
-                        foreach (var r in rects.Reverse())  // чтобы страницы ложились сверху-вниз, слева-направо
-                        {
-                            var rectArr = new RectangleF[] { r.Value };
-                        
-                            e.Graphics.FillRectangles( brush, rectArr);
-
-                            pen.Color = ((r.Key % nCol + r.Key / nCol) % 2 == 0) ? odd : even; // chessboard
-                            e.Graphics.DrawRectangles(pen, rectArr);
-                        }
-                }
-                else
-                    e.Graphics.DrawRectangles(pen, rects.Values.ToArray());
-
-                int ln;
-                int chr;
-                var sf = StringFormat.GenericDefault;
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-
-                SizeF textSz;
-                
-
-                const int fSize = 15;
-                float emSize = e.Graphics.DpiY * fSize / 72 - 1;
-
-                pen.Color = Color.White;
-                pen.Width = 5;
-                pen.LineJoin = LineJoin.Round;
-
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-
-                using (var gp = new GraphicsPath())
-                    using (var f = new Font("Sans serif", 15))
-                        using (var brush = new SolidBrush(Color.Blue))
-                            foreach (var key in rects.Keys)
-                            {
-                                var s = String.Format(R.PageFmt, key + 1);
-
-                                textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
-                                if (ln > 1 || chr < s.Length)
-                                {
-                                    s = String.Format("{0}", key + 1);
-                                    textSz = e.Graphics.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
-                                }
-
-                                if (hasOverlap)
-                                    brush.Color = ((key % nCol + key / nCol) % 2 == 0) ? odd : even; // chessboard
-
-                                gp.Reset();
-                                gp.AddString(s, f.FontFamily, (int)FontStyle.Regular, emSize, rects[key], sf);
-                                e.Graphics.DrawPath(pen, gp);
-                                e.Graphics.FillPath(brush, gp);
-                            }
-            }
-            
 
             // selection
             pen.Width = 1;
             pen.Color = Color.Black;
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            pen.DashStyle = DashStyle.Dash;
             if (selection != null && !selection.IsEmpty)
                 e.Graphics.DrawRectangle(pen, selection);
 
             pen.Dispose();
+        }
+
+        private void DrawPages(Graphics grph, Dictionary<int, RectangleF> rects, Pen pen)
+        {
+            bool hasOverlap = printDocument.Overlap > 0.001;
+            int nCol = printDocument.GetNumColumns(PageSize);
+
+            Color odd = Color.Blue;
+            Color even = Color.FromArgb(255, 0, 0xd0, 0xd0); // Color.Cyan
+
+            if (hasOverlap)
+            {
+                int alpha = 80;
+                int hue = 0xf0;
+                using (var brush = new SolidBrush(Color.FromArgb(alpha, hue, hue, hue + 15)))
+                    foreach (var r in rects.Reverse())  // чтобы страницы ложились сверху-вниз, слева-направо
+                    {
+                        var rectArr = new RectangleF[] { r.Value };
+
+                        grph.FillRectangles(brush, rectArr);
+
+                        pen.Color = ((r.Key % nCol + r.Key / nCol) % 2 == 0) ? odd : even; // chessboard
+                        grph.DrawRectangles(pen, rectArr);
+                    }
+            }
+            else
+                grph.DrawRectangles(pen, rects.Values.ToArray());
+
+            int ln;
+            int chr;
+            var sf = StringFormat.GenericDefault;
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
+
+            SizeF textSz;
+
+
+            const int fSize = 15;
+            float emSize = grph.DpiY * fSize / 72;
+
+            pen.Color = Color.White;
+            pen.Width = 5;
+            pen.LineJoin = LineJoin.Round;
+
+            grph.SmoothingMode = SmoothingMode.AntiAlias;
+            grph.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+
+            using (var gp = new GraphicsPath())
+            using (var f = new Font("Segoe UI", 15)) //Sans serif
+            using (var brush = new SolidBrush(Color.Blue))
+                foreach (var key in rects.Keys)
+                {
+                    var s = String.Format(R.PageFmt, key + 1);
+
+                    textSz = grph.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                    if (ln > 1 || chr < s.Length)
+                    {
+                        s = String.Format("{0}", key + 1);
+                        textSz = grph.MeasureString(s, f, rects[key].Size, sf, out chr, out ln);
+                    }
+
+                    if (hasOverlap)
+                        brush.Color = ((key % nCol + key / nCol) % 2 == 0) ? odd : even; // chessboard
+
+                    gp.Reset();
+                    gp.AddString(s, f.FontFamily, (int)FontStyle.Regular, emSize, rects[key], sf);
+                    grph.DrawPath(pen, gp);
+                    grph.FillPath(brush, gp);
+                }
         }
 
         #region select print Area
