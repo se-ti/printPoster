@@ -85,6 +85,16 @@
   <PropertyGroup>
     <ApplicationIcon>Properties\icon2.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.comodoca.com/?td=sha256</ManifestTimestampUrl>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>Internet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -140,6 +150,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <None Include="printPoster_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
