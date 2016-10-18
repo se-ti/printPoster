@@ -196,22 +196,22 @@ namespace printPoster
 
         public void Test()
         {
-            Bitmap bm = new Bitmap(2000, 1000);
-
-            bm.SetResolution(150, 150);
-
-            var pd = new MapPrintDocument();
-            pd.SetImage(bm);
-            pd.PrintArea = new Rectangle(300, 0, 1700, 1000);
-
-            var pageSize = new Size(900, 1300);
-            int n = pd.GetNumPages(pageSize);
-            sb.AppendLine("pages: " + n.ToString());
-
-            for (int i = 0; i < n; i++)
+            using (var bm = new Bitmap(2000, 1000))
+            using (var pd = new MapPrintDocument())
             {
-                var r = pd.GetSrcRect(i, pageSize);
-                sb.AppendLine("page " + i.ToString() + ": " + r.ToString());
+                bm.SetResolution(150, 150);
+                pd.SetImage(bm);
+                pd.PrintArea = new Rectangle(300, 0, 1700, 1000);
+
+                var pageSize = new Size(900, 1300);
+                int n = pd.GetNumPages(pageSize);
+                sb.AppendLine("pages: " + n.ToString());
+
+                for (int i = 0; i < n; i++)
+                {
+                    var r = pd.GetSrcRect(i, pageSize);
+                    sb.AppendLine("page " + i.ToString() + ": " + r.ToString());
+                }
             }
         }
 

@@ -39,6 +39,7 @@ namespace printPoster
             printDocument.DefaultPageSettings.Margins = new System.Drawing.Printing.Margins(defMargins, defMargins, defMargins, defMargins);
 
             crossHair = new Cursor(GetType(), "crosshair.cur");
+            Text = AboutBox.AssemblyProduct + " " +  AboutBox.AssemblyVersion;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace printPoster
 #endif
         }
 
-        private void GetMetadata(Image image)
+        private static void GetMetadata(Image image)
         {
             List<KeyValuePair<int, string>> knownIds = new List<KeyValuePair<int, string>>();
             knownIds.Add(new KeyValuePair<int, string>(0x0320, "im title"));
@@ -100,7 +101,7 @@ namespace printPoster
             String s = ((ImageFlags)image.Flags).ToString();
         }
 
-        private void ShowError(string title, string message)
+        private static void ShowError(string title, string message)
         {
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -108,10 +109,10 @@ namespace printPoster
 
         #region scale-related 
 
-        private static decimal[] m_scales = new decimal[] { 0.25m, 1m / 3, .5m, 1, /*1.33m,*/ 1.5m, /*1.66m,*/ 2, 2.5m, 3, 3.5m, 4 }; // а дальше через 1
-        private decimal ScaleKoeff(int scale)
+        private static decimal[] scales = new decimal[] { 0.25m, 1m / 3, .5m, 1, /*1.33m,*/ 1.5m, /*1.66m,*/ 2, 2.5m, 3, 3.5m, 4 }; // а дальше через 1
+        private static decimal ScaleKoeff(int scale)
         {
-            return scale < m_scales.Length ? m_scales[scale] : ((scale - m_scales.Length) + 5);
+            return scale < scales.Length ? scales[scale] : ((scale - scales.Length) + 5);
         }
 
         private decimal ScaleK { get { return ScaleKoeff(scale); } }
@@ -160,7 +161,7 @@ namespace printPoster
             zoomStatusLabel.Text = String.Format(R.ZoomFmt, Math.Round(100m/k, 2));
         }
 
-        private void ScaleScroll(ScrollProperties sp, decimal kOld, decimal kNew, int picPos, int oldScrollPos)
+        private static void ScaleScroll(ScrollProperties sp, decimal kOld, decimal kNew, int picPos, int oldScrollPos)
         {
             if (!sp.Visible)
                 return;
@@ -478,7 +479,7 @@ namespace printPoster
         private bool TryParseOverlap(out float ovrl)
         {
             var s = overlap.Text;
-            if (String.IsNullOrEmpty(s) || s.Trim() == String.Empty)
+            if (String.IsNullOrEmpty((s??"").Trim()))
             {
                 ovrl = .0f;
                 return true;
@@ -602,19 +603,19 @@ namespace printPoster
                     rects.Add(i, RectangleF.Intersect(bRect, rf));
             }
 
-            var pen = new Pen(Color.Blue, 2);
-            if (rects.Any())
-                DrawPages(e.Graphics, rects, pen);
+            using (var pen = new Pen(Color.Blue, 2))
+            {
+                if (rects.Any())
+                    DrawPages(e.Graphics, rects, pen);
 
 
-            // selection
-            pen.Width = 1;
-            pen.Color = Color.Black;
-            pen.DashStyle = DashStyle.Dash;
-            if (selection != null && !selection.IsEmpty)
-                e.Graphics.DrawRectangle(pen, selection);
-
-            pen.Dispose();
+                // selection
+                pen.Width = 1;
+                pen.Color = Color.Black;
+                pen.DashStyle = DashStyle.Dash;
+                if (selection != null && !selection.IsEmpty)
+                    e.Graphics.DrawRectangle(pen, selection);
+            }
         }
 
         private void DrawPages(Graphics grph, Dictionary<int, RectangleF> rects, Pen pen)
@@ -733,7 +734,7 @@ namespace printPoster
                    SideAutoScroll(panel1.VerticalScroll, start.Y, mainSz.Height, loc.Y, location.Y);
         }
 
-        private bool SideAutoScroll(ScrollProperties sp, int stPos, int size, int mousePos, int mousePosPic)
+        private static bool SideAutoScroll(ScrollProperties sp, int stPos, int size, int mousePos, int mousePosPic)
         {
             if (!sp.Visible)
                 return false;

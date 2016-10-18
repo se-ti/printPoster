@@ -8,6 +8,7 @@ using System.Linq;
 /// todo
 /// -+ icon 
 /// +- about
+/// сертификат для инсталляции
 /// инструмент линейка
 /// rotate image
 

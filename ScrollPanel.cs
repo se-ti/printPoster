@@ -27,10 +27,13 @@ namespace printPoster
         {
             if (ModifierKeys == Keys.Control)
             {
-                var scrolledPos = e.Location;
-                var pos = AutoScrollPosition;
-                scrolledPos.Offset(-pos.X, -pos.Y);
-                OnZoomEvent(new ZoomEventArgs(scrolledPos, e.Delta / 120));
+                if (e != null)
+                {
+                    var scrolledPos = e.Location;
+                    var pos = AutoScrollPosition;
+                    scrolledPos.Offset(-pos.X, -pos.Y);
+                    OnZoomEvent(new ZoomEventArgs(scrolledPos, e.Delta / 120));
+                }
                 return;
             }
             else if (ModifierKeys == Keys.Shift && HScroll && VScroll)
@@ -65,6 +68,6 @@ namespace printPoster
             }
         }
 
-        public delegate void ZoomEventHandler(object sender, ZoomEventArgs args);
+        public delegate void ZoomEventHandler(object sender, ZoomEventArgs e);
     }
 }
