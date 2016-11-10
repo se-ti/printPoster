@@ -27,8 +27,8 @@
     <InstallUrl>https://github.com/se-ti/printPoster/raw/master/dist/</InstallUrl>
     <ProductName>printPoster</ProductName>
     <PublisherName>Serge Titov</PublisherName>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>0.4.6.2</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>0.4.6.5</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
