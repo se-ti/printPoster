@@ -18,3 +18,4 @@
 
 *.manifest binary
 *.deploy binary
+*.application binary
