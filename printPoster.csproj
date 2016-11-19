@@ -27,8 +27,9 @@
     <InstallUrl>https://github.com/se-ti/printPoster/raw/master/dist/</InstallUrl>
     <ProductName>printPoster</ProductName>
     <PublisherName>Serge Titov</PublisherName>
-    <ApplicationRevision>5</ApplicationRevision>
-    <ApplicationVersion>0.4.6.5</ApplicationVersion>
+    <SuiteName>printPoster</SuiteName>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>0.4.6.6</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -97,6 +98,9 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup />
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
