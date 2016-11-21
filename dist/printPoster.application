@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xrml="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <assemblyIdentity name="printPoster.application" version="0.4.6.5" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
-  <description asmv2:publisher="Serge Titov" asmv2:product="printPoster" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <assemblyIdentity name="printPoster.application" version="0.4.6.6" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <description asmv2:publisher="Serge Titov" co.v1:suiteName="printPoster" asmv2:product="printPoster" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" co.v1:createDesktopShortcut="true">
     <subscription>
       <update>
@@ -11,21 +11,21 @@
     <deploymentProvider codebase="https://github.com/se-ti/printPoster/raw/master/dist/printPoster.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Application Files\printPoster_0_4_6_5\printPoster.exe.manifest" size="12634">
-      <assemblyIdentity name="printPoster.exe" version="0.4.6.5" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" type="win32" />
+    <dependentAssembly dependencyType="install" codebase="Application Files\printPoster_0_4_6_6\printPoster.exe.manifest" size="12634">
+      <assemblyIdentity name="printPoster.exe" version="0.4.6.6" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>TKGh9rU0o/LkgySHlIBALJ+EXWM=</dsig:DigestValue>
+        <dsig:DigestValue>paJ7fIVy1Wc/FY/PVBnPbYfgpGw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-<publisherIdentity name="CN=WS-WS\titov" issuerKeyHash="d5e896d099d91b494e12336282a411b2b958e1e5" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>87LZ/z+aWDkzNDM0YCvP0dxBFRs=</DigestValue></Reference></SignedInfo><SignatureValue>CwmMxwy8A5SO2Jj+GHKJ8UgUc1FuVHk9+RnVtdTwPd1SKOSEbnVRTh0LY1Z8LCYl+hp8WV2CSTHhkaPO6zvuGbMNgpLD+Q/M6QHNK44IBl+y96vF32R+H32DzRTib8E2Zrbwbw0nCz4FkNDivwA19olHoFb5jLy+YwxzWsapxPo=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="1b1541dcd1cf2b603433343339589a3fffd9b2f3" Description="" Url=""><as:assemblyIdentity name="printPoster.application" version="0.4.6.5" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WS-WS\titov</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>ff7dLIto7lDKsy+FvxQ/KTAK/r0=</DigestValue></Reference></SignedInfo><SignatureValue>v19n9ZvTS75iThdYIh5vCgqTpgDuCti9OZhOfO7hVCl7Qc1fjviUFQEquVmMXpeOeldKBl0QHCL8T07ik4N3FypQZzkqdnFM8KDUcu75Hi/G6TKXYG8AcKwZLUyr8zURIzTwVhLArr8sIi0wEJ42Wa7qbK4LlmQKZPANGcH/cu8=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBxTCCAS6gAwIBAgIQHNWlCPlA+aJHgX/eNXpcKjANBgkqhkiG9w0BAQUFADAhMR8wHQYDVQQDHhYAVwBTAC0AVwBTAFwAdABpAHQAbwB2MB4XDTE2MDkyNjEzMzYyMVoXDTE3MDkyNjE5MzYyMVowITEfMB0GA1UEAx4WAFcAUwAtAFcAUwBcAHQAaQB0AG8AdjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHckCAwEAATANBgkqhkiG9w0BAQUFAAOBgQCI2pfPawApD3H6R2HXL4bkEk0oTLXsY2HGVVfVyuFMHN5sk3N1Odi/a97OwxnbGweMkGEpI/do5bs3l6ltHbanKZjCDVlohz0uLYuSAAKXLPA5NoKmzn/QUO1v0dtVeJmQIRbNVNAUSXCbie0n+yQwsGusbOmts3gfMRmuAywW5w==</X509Certificate></X509Data></KeyInfo><Object><as:Timestamp>MIIHjAYJKoZIhvcNAQcCoIIHfTCCB3kCAQAxCzAJBgUrDgMCGgUAMIGRBgkqhkiG
-9w0BBwGggYMEgYC/X2f1m9NLvmJOF1giHm8KCpOmAO4K2L05mE587uFUKXtBzV+O
-+JQVASq5WYxel456V0oGXRAcIvxPTuKTg3cXKlBnOSp2cUzwoNRy7vkeL8bpMpdg
-bwBwrBktTKvzNREjNPBWEsCuvywiLTAQnjZZrupsrguWZApk8A0Zwf9y76CCBJ0w
+<publisherIdentity name="CN=WS-WS\titov" issuerKeyHash="d5e896d099d91b494e12336282a411b2b958e1e5" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>0HgN3kMFCl7ZiQ5Sohup3P6yUmg=</DigestValue></Reference></SignedInfo><SignatureValue>GW+BWKMX7x40AfYRovEc1uwlOVZ/7rC3B4/uWI+W2ht9b+uZJX9j6TV5hyFM+fsi+8nbahhOUSbnfPczjxwa7ttc64r+4QlUYscY6s1tN/stqQPuPZ/6+edDBojzaurW5Dm2jLzjVzenAqJP8luBsjWR8NyA/WdsLC/iuyCVpeI=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="6852b2fedca91ba2520e89d95e0a0543de0d78d0" Description="" Url=""><as:assemblyIdentity name="printPoster.application" version="0.4.6.6" publicKeyToken="733085945060d870" language="neutral" processorArchitecture="msil" xmlns="urn:schemas-microsoft-com:asm.v1" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=WS-WS\titov</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>55hWRgyoPvvUpDtUI0m7TDh60DU=</DigestValue></Reference></SignedInfo><SignatureValue>c/cJxHph/WmdYk40cPNMYyIjiCYMmDHEGgJTaHnSTFzx/6NEOHLobZ1Pz1mHCI88YoEU6XH+4wXVbpe/16Wa+z6/F4HUK/9oqcE9tIgd0KcJMqnUATPKWHAY+xaOd61SDADlzAQfg6/OAjD+II52ysfwDLvcqL35DuOEtlKx9I4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>xs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHck=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBxTCCAS6gAwIBAgIQHNWlCPlA+aJHgX/eNXpcKjANBgkqhkiG9w0BAQUFADAhMR8wHQYDVQQDHhYAVwBTAC0AVwBTAFwAdABpAHQAbwB2MB4XDTE2MDkyNjEzMzYyMVoXDTE3MDkyNjE5MzYyMVowITEfMB0GA1UEAx4WAFcAUwAtAFcAUwBcAHQAaQB0AG8AdjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxs2DnzQtbMIc4vVFUK1XIUF+qDX2qpQcRrq8ApgRfWZiofzxn6GKJZLthVhfs4dZsBzr+mBhjke2XCJtgSPHw9m9Eaxr5l9kBDcfBpImP/XclCwCrduuuwfDP6qQ9R47lAY2v5nlJ8s4EF+O4Y2dxFSCQJTw4eojyJC/ZWPZHckCAwEAATANBgkqhkiG9w0BAQUFAAOBgQCI2pfPawApD3H6R2HXL4bkEk0oTLXsY2HGVVfVyuFMHN5sk3N1Odi/a97OwxnbGweMkGEpI/do5bs3l6ltHbanKZjCDVlohz0uLYuSAAKXLPA5NoKmzn/QUO1v0dtVeJmQIRbNVNAUSXCbie0n+yQwsGusbOmts3gfMRmuAywW5w==</X509Certificate></X509Data></KeyInfo><Object><as:Timestamp>MIIHjAYJKoZIhvcNAQcCoIIHfTCCB3kCAQAxCzAJBgUrDgMCGgUAMIGRBgkqhkiG
+9w0BBwGggYMEgYBz9wnEemH9aZ1iTjRw80xjIiOIJgyYMcQaAlNoedJMXPH/o0Q4
+cuhtnU/PWYcIjzxigRTpcf7jBdVul7/XpZr7Pr8XgdQr/2ipwT20iB3QpwkyqdQB
+M8pYcBj7Fo53rVIMAOXMBB+Dr84CMP4gjnbKx/AMu9yovfkO44S2UrH0jqCCBJ0w
 ggSZMIIDgaADAgECAg8WiPA5JV5jjmkUOQfmMwswDQYJKoZIhvcNAQEFBQAwgZUx
 CzAJBgNVBAYTAlVTMQswCQYDVQQIEwJVVDEXMBUGA1UEBxMOU2FsdCBMYWtlIENp
 dHkxHjAcBgNVBAoTFVRoZSBVU0VSVFJVU1QgTmV0d29yazEhMB8GA1UECxMYaHR0
@@ -55,12 +55,12 @@ CQYDVQQGEwJVUzELMAkGA1UECBMCVVQxFzAVBgNVBAcTDlNhbHQgTGFrZSBDaXR5
 MR4wHAYDVQQKExVUaGUgVVNFUlRSVVNUIE5ldHdvcmsxITAfBgNVBAsTGGh0dHA6
 Ly93d3cudXNlcnRydXN0LmNvbTEdMBsGA1UEAxMUVVROLVVTRVJGaXJzdC1PYmpl
 Y3QCDxaI8DklXmOOaRQ5B+YzCzAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsG
-CSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTYxMTEwMTc0MzQyWjAjBgkqhkiG
-9w0BCQQxFgQUgGQfgXZcvFOUET1OaFgpzuS3ZTkwDQYJKoZIhvcNAQEBBQAEggEA
-NiadGiiS0uWwEdFdXOWUnbr/LBW02tZqmsP6xeyHOo8bKDNimUpUyTJCun2yCdGH
-vHghlV859AxymwwLPcBqfER7EJXJi4hQ01r/EyQoax78K7G7vc0++/evmFShdLZg
-94e0bzlt/nwU95CHggElXE20Jgt1oklvMkAnto6wHtrf/MubOza+Ob83n7EbDM6+
-CIR1mki8lfUKxRSTZqYI5PcTTm5HkZ2gaAVG9PxtqnNSHPaOlyWijIMYu3hWl+m/
-ZDQQAe9nOWRDxcadb+1jTO0xuw54UhXfV+APqsVMy4EirIw4ABw3MW6smIyMDEIB
-W9AJ+kh02733VaRlAxbDbQ==
+CSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTYxMTE5MTczNDE1WjAjBgkqhkiG
+9w0BCQQxFgQUiorOW3MbLqAtLERguxNszf4ZYhwwDQYJKoZIhvcNAQEBBQAEggEA
+I4b6jORfAxVWWflj3Sdk7jCz4/ndo31ljjYVNXsZbxZRrKIYMT+FXthVJuunMpxx
+zsZSLf7Kw4vksHG09795QljmG+UiP3pnadk8gU5UaY51O6BKe3dlbR31H5XRgQVD
+P5s3SbXmrf7qzcJj/bp2LOaJcNuG9UVOBVgLXeurXOYqqhmLKDo8luuiXQpjy01y
++8/g8SAMQLw1PmSfRqogpLjBBVzhcR2vZz3ql7JdQ8Hv6YwHmwYU/rY/CCgt9SYm
+noBrM9rbHWXACIGmPNLnUBuhL3s6SL4POYFycjImFCaLqzg9zZywe36RwHN93H6R
+bK4J8oqUb9JNwJxuqTyYYg==
 </as:Timestamp></Object></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
